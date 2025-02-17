@@ -36,9 +36,10 @@ def _make_request(messages):
 
 def generate_story():
     response = _make_request([
-        {"role": "system", "content": [{"type": "text", "content": {"text": "Ты - писатель. Напиши неболшую, но захватывающую историю про то слово, которое тебе отправит пользователь."}}]},
-        {"role": "user", "content": [{"type": "text", "content": {"text": _get_random_word()}}]}
+        {"role": "user", "content": [{"type": "text", "content": {"text": "Ты - писатель. Напиши неболшую, но захватывающую историю про то слово, которое тебе я тебе сейчас напишу. Слово: " + _get_random_word()}}]}
     ])
+    if 'error' in response:
+        raise Exception(response['error'])
     return response[0]['generated_text']
 
 
