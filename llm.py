@@ -43,6 +43,15 @@ def generate_story():
     return response[0]['generated_text']
 
 
+def generate_fact():
+    response = _make_request([
+        {"role": "user", "content": [{"type": "text", "content": {"text": "Ты - зоолог и орнитолог. Расскажи интересный файт (кратко) про то животное, которое я тебе сейчас напишу. В самом конце своего сообщения ты должен поставить знак %%% (три знака процента), а сразу за ними название твоего объекта рассказа на русском языке. Это нужно для того, чтобы можно было найти картинку. Слово: " + _get_random_word()}}]}
+    ])
+    if 'error' in response:
+        raise Exception(response['error'])
+    return response[0]['generated_text']
+
+
 if __name__ == "__main__":
-    print(generate_story())
+    print(generate_fact())
 
